@@ -1,0 +1,165 @@
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.universe {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at 50% 20%, #1a1a2e 0%, #000 70%);
+}
+
+/* Rayos de sol suaves y místicos */
+.sun-rays {
+    position: absolute;
+    top: -10%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    transform: translateX(-50%);
+    background: conic-gradient(from 180deg at 50% 0%,
+            transparent 0%,
+            rgba(255, 255, 200, 0.03) 10%,
+            transparent 20%);
+    animation: rotateRays 20s linear infinite;
+    z-index: 1;
+    /* Detrás del ramo, delante de los fuegos */
+}
+
+@keyframes rotateRays {
+    from {
+        transform: translateX(-50%) rotate(0deg);
+    }
+
+    to {
+        transform: translateX(-50%) rotate(360deg);
+    }
+}
+
+.bouquet-container {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    height: 300px;
+    z-index: 10;
+}
+
+/* Estilo de las flores */
+.flower {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50% 0 50% 0;
+    opacity: 0;
+    filter: blur(1px);
+}
+
+/* Colores solicitados con brillo */
+.blue {
+    background: #00ffff;
+    box-shadow: 0 0 15px #00ffff;
+}
+
+.yellow {
+    background: #ffdf00;
+    box-shadow: 0 0 15px #ffdf00;
+}
+
+.violet {
+    background: #eaeaff;
+    box-shadow: 0 0 15px #dcd0ff;
+}
+
+/* Animación de aparición discontinua */
+@keyframes appear {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(45deg);
+    }
+}
+
+.love-text {
+    position: absolute;
+    bottom: 15%;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-family: 'Georgia', serif;
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px #fff, 0 0 20px #ff007f;
+    z-index: 10;
+}
+
+/* === ESTILOS PARA FUEGOS ARTIFICIALES DE CORAZONES === */
+
+.heart-firework {
+    position: absolute;
+    z-index: 0;
+    /* Al fondo de todo */
+}
+
+/* El elemento principal es invisible, sus 'partículas' forman la explosión */
+.heart-particle {
+    position: absolute;
+    width: 10px;
+    /* Tamaño base de la partícula */
+    height: 10px;
+    /* Crear forma de corazón con pseudo-elementos */
+    background: inherit;
+    /* Hereda el color del contenedor principal */
+    transform: rotate(-45deg);
+    opacity: 0;
+    animation: explode 2.5s ease-out forwards;
+}
+
+.heart-particle::before,
+.heart-particle::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: inherit;
+    border-radius: 50%;
+}
+
+.heart-particle::before {
+    top: -50%;
+    left: 0;
+}
+
+.heart-particle::after {
+    top: 0;
+    left: 50%;
+}
+
+/* Animación de explosión y desvanecimiento */
+@keyframes explode {
+    0% {
+        transform: translate(0, 0) rotate(-45deg) scale(0.1);
+        opacity: 1;
+    }
+
+    100% {
+        /* Se expande hacia afuera (usando JavaScript para variar la dirección) y se desvanece */
+        transform: translate(var(--dx), var(--dy)) rotate(-45deg) scale(var(--scale));
+        opacity: 0;
+    }
+}
